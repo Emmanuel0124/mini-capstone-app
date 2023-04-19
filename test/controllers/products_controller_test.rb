@@ -8,4 +8,10 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     data = JSON.parse(response.body)
     assert_equal Product.count, data.length
   end
+  test "create" do
+    assert_difference "Product.count", 1 do
+      post "/products.json", params: { name: "lake", width: 800, height: 600 }
+      assert_response 200
+    end
+  end
 end
